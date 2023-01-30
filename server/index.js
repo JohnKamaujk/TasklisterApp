@@ -12,7 +12,7 @@ app.use(express.json());
 app.use("/api/todos", todos);
 
 const connection_string = process.env.CONNECTION_STRING;
-const port = process.env.PORT || 5555;
+const port = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
   res.send("Welcome to my node app...!");
