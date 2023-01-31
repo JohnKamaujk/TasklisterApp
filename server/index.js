@@ -1,5 +1,6 @@
 const express = require("express");
 const todos = require("./routes/todos");
+const signUp = require("./routes/signUp");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
@@ -10,6 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/todos", todos);
+app.use("/api/signup", signUp);
 
 const connection_string = process.env.CONNECTION_STRING;
 const port = process.env.PORT || 5000;
