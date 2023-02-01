@@ -28,9 +28,13 @@ const TodoList = () => {
   return (
     <>
       <div className={classes.todosStyles}>
-        <Typography variant="h5">My Tasks</Typography>
-        <TodoItem />
-        <TodoItem />
+        <Typography variant="h5">
+          {todos.length > 0 ? "MyTodos" : "NoTodos"}
+        </Typography>
+        {todos &&
+          todos.map((todo) => {
+            return <TodoItem todo={todo} key={todo._id} />;
+          })}
       </div>
     </>
   );

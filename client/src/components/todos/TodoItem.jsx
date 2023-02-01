@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Button, ButtonGroup } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { Create, Delete, CheckCircle } from "@material-ui/icons";
+import moment from "moment";
 
 const useStyles = makeStyles({
   todostyle: {
@@ -17,18 +18,21 @@ const useStyles = makeStyles({
   },
 });
 
-const TodoItem = () => {
+const TodoItem = ({ todo }) => {
   const classes = useStyles();
+
+  const { name, date, isComplete } = todo;
+
   return (
     <>
       <div className={classes.todostyle}>
         <div>
-          <Typography variant="subtitle1">Learn Redux Toolkit</Typography>
+          <Typography variant="subtitle1">{name}</Typography>
           <Typography variant="body2" className={classes.textStyle}>
             Author : Johnny
           </Typography>
           <Typography variant="body2" className={classes.textStyle}>
-            Created: now
+            Added: {moment(date).fromNow()}
           </Typography>
         </div>
         <div>
