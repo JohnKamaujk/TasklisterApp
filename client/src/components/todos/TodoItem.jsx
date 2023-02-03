@@ -16,6 +16,12 @@ const useStyles = makeStyles({
   textStyle: {
     color: "#8f8f8f",
   },
+  isCompletebtn: {
+    color: "green",
+  },
+  checked: {
+    textDecoration: "line-through",
+  },
 });
 
 const TodoItem = ({ todo }) => {
@@ -27,7 +33,13 @@ const TodoItem = ({ todo }) => {
     <>
       <div className={classes.todostyle}>
         <div>
-          <Typography variant="subtitle1">{name}</Typography>
+          {isComplete ? (
+            <Typography variant="subtitle1">{name}</Typography>
+          ) : (
+            <Typography className={classes.checked} variant="subtitle1">
+              {name}
+            </Typography>
+          )}
           <Typography variant="body2" className={classes.textStyle}>
             Author : Johnny
           </Typography>
@@ -37,9 +49,15 @@ const TodoItem = ({ todo }) => {
         </div>
         <div>
           <ButtonGroup size="small" aria-label="outlined primary button group">
-            <Button>
-              <CheckCircle color="action" />
-            </Button>
+            {isComplete ? (
+              <Button>
+                <CheckCircle color="action" className={classes.isCompletebtn} />
+              </Button>
+            ) : (
+              <Button>
+                <CheckCircle color="action" />
+              </Button>
+            )}
             <Button>
               <Create color="primary" />
             </Button>
