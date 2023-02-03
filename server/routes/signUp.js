@@ -14,6 +14,8 @@ router.post("/", async (req, res) => {
     password: Joi.string().min(6).max(200).required(),
   });
 
+  // destructure error from schema
+
   const { error } = schema.validate(req.body);
 
   if (error) return res.status(400).send(error.details[0].message);
