@@ -23,7 +23,22 @@ export const addTodo = (todo) => {
       .post(`${url}/todos`, todo)
       .then((todo) => {
         dispatch({
-          type: "ADD_TOD0",
+          type: "ADD_TODO",
+          todo,
+        });
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+};
+export const updateTodo = (updatedTodo, id) => {
+  return (dispatch) => {
+    axios
+      .put(`${url}/todos/${id}`, updatedTodo)
+      .then((todo) => {
+        dispatch({
+          type: "UPDATE_TODO",
           todo,
         });
       })

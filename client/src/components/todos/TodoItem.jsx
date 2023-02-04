@@ -24,8 +24,18 @@ const useStyles = makeStyles({
   },
 });
 
-const TodoItem = ({ todo }) => {
+const TodoItem = ({ todo, setTodo }) => {
   const classes = useStyles();
+
+  const handleUpdate = () => {
+    setTodo(todo);
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
 
   const { name, date, isComplete } = todo;
 
@@ -58,7 +68,7 @@ const TodoItem = ({ todo }) => {
                 <CheckCircle color="action" />
               </Button>
             )}
-            <Button>
+            <Button onClick={handleUpdate}>
               <Create color="primary" />
             </Button>
             <Button>

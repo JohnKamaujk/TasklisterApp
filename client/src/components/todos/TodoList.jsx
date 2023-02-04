@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TodoList = () => {
+const TodoList = ({ setTodo }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos);
@@ -33,7 +33,7 @@ const TodoList = () => {
         </Typography>
         {todos &&
           todos.map((todo) => {
-            return <TodoItem todo={todo} key={todo._id} />;
+            return <TodoItem setTodo={setTodo} todo={todo} key={todo._id} />;
           })}
       </div>
     </>
