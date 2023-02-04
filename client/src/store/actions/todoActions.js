@@ -57,11 +57,29 @@ export const updateTodo = (updatedTodo, id) => {
 export const checkTodo = ( id) => {
   return (dispatch) => {
     axios
-      .patch(`${url}/todos/${id}`, {})
+      .patch(`${url}/todos/${id}`,{})
       .then((todo) => {
         dispatch({
           type: "CHECK_TODO",
           todo,
+        });
+      })
+      .catch((error) => {
+        console.log(error.response);
+        toast.error(error.response?.data, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      });
+  };
+};
+export const deleteTodo = (id) => {
+  return (dispatch) => {
+    axios
+      .delete(`${url}/todos/${id}`)
+      .then((todo) => {
+        dispatch({
+          type: "DELETE_TODO",
+          id
         });
       })
       .catch((error) => {
