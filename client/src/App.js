@@ -5,6 +5,8 @@ import Signin from "./components/auth/Signin";
 import Signup from "./components/auth/Signup";
 import Navbar from "./components/navbar/Navbar";
 import { makeStyles } from "@material-ui/styles";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Container } from "@material-ui/core";
 
@@ -18,6 +20,7 @@ function App() {
   const classes = useStyles();
   return (
     <>
+      <ToastContainer />
       <Container maxWidth="md">
         <Navbar />
         <Container className={classes.contentStyle} maxWidth="sm">

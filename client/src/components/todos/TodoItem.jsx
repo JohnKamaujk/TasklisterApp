@@ -1,8 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Typography, Button, ButtonGroup } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { Create, Delete, CheckCircle } from "@material-ui/icons";
 import moment from "moment";
+
+import { checkTodo } from "../../store/actions/todoActions";
 
 const useStyles = makeStyles({
   todostyle: {
@@ -26,6 +29,7 @@ const useStyles = makeStyles({
 
 const TodoItem = ({ todo, setTodo }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const handleUpdate = () => {
     setTodo(todo);
@@ -37,6 +41,10 @@ const TodoItem = ({ todo, setTodo }) => {
     });
   };
 
+  const handleCheck = (id) => {
+    dispatch(checkTodo(id));
+  };
+
   const { name, date, isComplete } = todo;
 
   return (
@@ -44,11 +52,9 @@ const TodoItem = ({ todo, setTodo }) => {
       <div className={classes.todostyle}>
         <div>
           {isComplete ? (
-            <Typography variant="subtitle1">{name}</Typography>
+            <Typography className={classes.checked} variant="subtitle1">{name}</Typography>
           ) : (
-            <Typography className={classes.checked} variant="subtitle1">
-              {name}
-            </Typography>
+            <Typography variant="subtitle1">{name}</Typography>
           )}
           <Typography variant="body2" className={classes.textStyle}>
             Author : Johnny
@@ -59,15 +65,13 @@ const TodoItem = ({ todo, setTodo }) => {
         </div>
         <div>
           <ButtonGroup size="small" aria-label="outlined primary button group">
-            {isComplete ? (
-              <Button>
+            <Button onClick={() => handleCheck(todo._id)}>
+              {isComplete ? (
                 <CheckCircle color="action" className={classes.isCompletebtn} />
-              </Button>
-            ) : (
-              <Button>
+              ) : (
                 <CheckCircle color="action" />
-              </Button>
-            )}
+              )}
+            </Button>
             <Button onClick={handleUpdate}>
               <Create color="primary" />
             </Button>
