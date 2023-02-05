@@ -1,9 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { AppBar, Typography, Toolbar, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link, useNavigate } from "react-router-dom";
+
+import { signOut } from "../../store/actions/authActions";
 
 const useStyles = makeStyles({
   root: {
@@ -22,11 +24,17 @@ const Navbar = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const state = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   console.log(state);
 
+  const handleSignout = () => {
+    dispatch(signOut());
+    // when user wants to signout direct them to signin page
+    navigate("/signin");
+  };
   const handleSignin = () => {
-    // when user wants to signin or signout direct them to signin page
+    // when user wants to signin  direct them to signin page
     navigate("/signin");
   };
   return (
@@ -41,7 +49,7 @@ const Navbar = () => {
           <Typography variant="subtitle2" className={classes.root}>
             Logged in as Johnny
           </Typography>
-          <Button className={classes.btnStyle} onClick={handleSignin}>
+          <Button className={classes.btnStyle} onClick={handleSignout}>
             SignOut
           </Button>
           <Button className={classes.btnStyle} onClick={handleSignin}>
