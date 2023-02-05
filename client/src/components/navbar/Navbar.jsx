@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
 import { AppBar, Typography, Toolbar, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,6 +21,9 @@ const useStyles = makeStyles({
 const Navbar = () => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const state = useSelector((state) => state);
+
+  console.log(state);
 
   const handleSignin = () => {
     // when user wants to signin or signout direct them to signin page
