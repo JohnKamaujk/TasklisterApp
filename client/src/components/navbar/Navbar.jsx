@@ -23,10 +23,10 @@ const useStyles = makeStyles({
 const Navbar = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const state = useSelector((state) => state);
+  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  console.log(state);
+  console.log(auth);
 
   const handleSignout = () => {
     dispatch(signOut());
@@ -46,22 +46,29 @@ const Navbar = () => {
               Tasklister
             </Link>
           </Typography>
-          <Typography variant="subtitle2" className={classes.root}>
-            Logged in as Johnny
-          </Typography>
-          <Button className={classes.btnStyle} onClick={handleSignout}>
-            SignOut
-          </Button>
-          <Button className={classes.btnStyle} onClick={handleSignin}>
-            <Link to="/signin" className={classes.linkStyle}>
-              Signin
-            </Link>
-          </Button>
-          <Button className={classes.btnStyle}>
-            <Link to="/signup" className={classes.linkStyle}>
-              Signup
-            </Link>
-          </Button>
+          {auth._id ? (
+            <>
+              <Typography variant="subtitle2" className={classes.root}>
+                Logged in as {auth.name}
+              </Typography>
+              <Button className={classes.btnStyle} onClick={handleSignout}>
+                SignOut
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button className={classes.btnStyle} onClick={handleSignin}>
+                <Link to="/signin" className={classes.linkStyle}>
+                  Signin
+                </Link>
+              </Button>
+              <Button className={classes.btnStyle}>
+                <Link to="/signup" className={classes.linkStyle}>
+                  Signup
+                </Link>
+              </Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </>

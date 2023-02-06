@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/styles";
 import { Create, Delete, CheckCircle } from "@material-ui/icons";
 import moment from "moment";
 
-import { checkTodo,deleteTodo } from "../../store/actions/todoActions";
+import { checkTodo, deleteTodo } from "../../store/actions/todoActions";
 
 const useStyles = makeStyles({
   todostyle: {
@@ -48,19 +48,21 @@ const TodoItem = ({ todo, setTodo }) => {
     dispatch(deleteTodo(id));
   };
 
-  const { name, date, isComplete } = todo;
+  const { name, date, isComplete, author } = todo;
 
   return (
     <>
       <div className={classes.todostyle}>
         <div>
           {isComplete ? (
-            <Typography className={classes.checked} variant="subtitle1">{name}</Typography>
+            <Typography className={classes.checked} variant="subtitle1">
+              {name}
+            </Typography>
           ) : (
             <Typography variant="subtitle1">{name}</Typography>
           )}
           <Typography variant="body2" className={classes.textStyle}>
-            Author : Johnny
+            Author : {author}
           </Typography>
           <Typography variant="body2" className={classes.textStyle}>
             Added: {moment(date).fromNow()}
