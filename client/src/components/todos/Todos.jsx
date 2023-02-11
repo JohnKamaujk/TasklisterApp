@@ -18,7 +18,7 @@ const Todos = () => {
 
   useEffect(() => {
     if (!auth._id) return navigate("/signin");
-  }, []);
+  }, [auth._id, navigate]);
 
   return (
     <>
